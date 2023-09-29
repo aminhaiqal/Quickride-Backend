@@ -1,19 +1,16 @@
 const firebase = require('firebase/app');
+const { setCustomClaimsBasedOnUserRoles } = require('../middleware/roles');
 require('firebase/auth');
 
-// Initialize Firebase (as shown previously)
-
-// Function to handle user signup
 async function signup(email, password) {
   try {
     // Create a new user with Firebase Authentication
     const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
     const user = userCredential.user;
-
-    // Sending a verification email
     user.sendEmailVerification();
-
+    await setCustomClaimsBasedOnUserRoles(user.uid, { passenger: true });
     return user;
+    
   } catch (error) {
     console.error('Error creating user:', error);
     throw error;

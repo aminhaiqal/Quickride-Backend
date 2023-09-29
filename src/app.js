@@ -1,11 +1,10 @@
 const express = require('express');
 const firebase = require('firebase/app');
 const firebaseConfig = require('../configs/firebase');
-const { signup } = require('../src/services/auth');
+const authRoutes = require('./authentication/routes/authRoutes');
 
 require('firebase/database');
 
-// Initialize Firebase with your configuration
 try {
   firebase.initializeApp(firebaseConfig);
 } catch (error) {
@@ -16,24 +15,7 @@ try {
 const app = express();
 
 // Define your routes and middleware here
-app.get('/signup', (req, res) => {
-  res.render('signup');
-});
-
-app.post('/signup', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    // Call the signup function from the auth module
-    const user = await signup(email, password);
-
-    // Redirect to the login page after successful signup
-    res.redirect('/login');
-  } catch (error) {
-    console.error('Error creating user:', error);
-    res.redirect('/signup'); // Redirect back to the signup page on failure
-  }
-});
+app.use('/auth', authRoutes); // Mount the authentication routes
 
 // Start the Express.js server
 const port = process.env.PORT || 3000;
