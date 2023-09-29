@@ -1,7 +1,7 @@
 const express = require('express');
 const firebase = require('firebase/app');
 const firebaseConfig = require('../configs/firebase');
-const authRoutes = require('./authentication/routes/authRoutes');
+const authRoute = require('./features/authentication/routes/auth-route');
 
 require('firebase/database');
 
@@ -15,7 +15,7 @@ try {
 const app = express();
 
 // Define your routes and middleware here
-app.use('/auth', authRoutes); // Mount the authentication routes
+app.use('/auth', authRoute);
 
 // Start the Express.js server
 const port = process.env.PORT || 3000;
