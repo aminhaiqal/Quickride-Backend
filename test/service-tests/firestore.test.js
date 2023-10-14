@@ -9,7 +9,7 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-describe('Firestore Tests', function () {
+describe('Firestore Connection Tests', function () {
   it('should return data from Firestore', async function () {
     const docRef = db.collection('testCollection').doc('testDocument');
     await docRef.set({ field1: 'value1' });
