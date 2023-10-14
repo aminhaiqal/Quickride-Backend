@@ -23,7 +23,6 @@ const CreateUser = async (email, last_login, password, phone_num, displayName) =
         email,
         last_login,
         phone_num,
-        user_role,
         displayName,
     };
 
