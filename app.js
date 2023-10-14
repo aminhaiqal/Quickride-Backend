@@ -1,7 +1,7 @@
 const express = require('express');
 const firebase = require('firebase/app');
-const firebaseConfig = require('../configs/firebase');
-const authRoute = require('./features/authentication/routes/auth-route');
+const firebaseConfig = require('./configs/firebase');
+const authRoute = require('./routes/auth-route');
 
 require('firebase/database');
 
