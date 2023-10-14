@@ -41,4 +41,6 @@ Thumbs.db
 
 # Config files
 .env
+
+# Project Configuration
 /configs/
