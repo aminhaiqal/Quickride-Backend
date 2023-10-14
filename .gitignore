@@ -41,4 +41,4 @@ Thumbs.db
 
 # Config files
 .env
-/configs/firebase.js
+/configs/
