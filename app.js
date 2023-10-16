@@ -1,24 +1,15 @@
-const express = require('express');
-const firebase = require('firebase/app');
-const firebaseConfig = require('./configs/firebase');
-const authRoute = require('./routes/auth-route');
+const express = require('express')
+const app = express()
+app.use(express.json());
+const authRouter = require('./routers/auth_router');
+const port = 3000
 
-require('firebase/database');
+app.use('/account', authRouter);
 
-try {
-  firebase.initializeApp(firebaseConfig);
-} catch (error) {
-  console.error('Error initializing Firebase:', error);
-}
+app.get('/', (req, res) => {
+  res.send('Hello Express!')
+})
 
-// Create an Express.js app
-const app = express();
-
-// Define your routes and middleware here
-app.use('/auth', authRoute);
-
-// Start the Express.js server
-const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+  console.log(`Example app listening on port ${port}`)
+})
