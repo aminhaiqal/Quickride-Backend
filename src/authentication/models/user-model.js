@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('../configs/quickride-qr0103-firebase-adminsdk-24xtb-32489b161c.json');
+const serviceAccount = require('../../../configs/quickride-qr0103-firebase-adminsdk-24xtb-32489b161c.json');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
