@@ -1,18 +1,30 @@
-const { signup } = require('../services/authService');
+const express = require('express');
+const router = express.Router();
+const authService = require('../services/user_service');
+const User = require('../models/user-model');
 
-async function signupController(req, res) {
+router.post('/signup', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Call the signup function from the auth module
-    const user = await signup(email, password);
-
-    // Redirect to the login page after successful signup
-    res.redirect('/login');
+    const user = await authService.signUpWithEmailAndPassword(email, password);
+    res.json(new User(user.uid, user.email, user.displayName));
   } catch (error) {
-    console.error('Error creating user:', error);
-    res.redirect('/signup'); // Redirect back to the signup page on failure
+    res.status(400).json({ message: 'Error signing up', error: error.message });
   }
-}
+});
 
-module.exports = { signupController };
+router.post('/signin', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await authService.signInWithEmailAndPassword(email, password);
+    res.json(new User(user.uid, user.email, user.displayName));
+  } catch (error) {
+    res.status(400).json({ message: 'Error signing in', error: error.message });
+  }
+});
+
+// Add routes for signing in with Facebook and Google
+
+module.exports = router;
