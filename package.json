@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend for Quickride",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "start": "node app.js",
     "test": "mocha 'tests/**/*.test.js' --exit"

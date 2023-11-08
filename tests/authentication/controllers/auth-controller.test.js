@@ -1,5 +1,7 @@
-const { expect } = require('chai');
-const authService = require('../../../src/authentication/services/user_service');
+import { expect } from 'chai';
+import AuthService from '../../../src/authentication/services/user_service';
+
+const auth = new AuthService();
 
 describe('Auth Service', function () {
   describe('#signUpWithEmailAndPassword()', function () {
@@ -7,7 +9,7 @@ describe('Auth Service', function () {
       const email = 'test@example.com';
       const password = 'password123';
 
-      const user = await authService.signUpWithEmailAndPassword(email, password);
+      const user = await auth.signUpWithEmailAndPassword(email, password);
 
       expect(user).to.be.an('object');
       expect(user.email).to.equal(email);
@@ -20,7 +22,7 @@ describe('Auth Service', function () {
       const email = 'test@example.com';
       const password = 'password123';
 
-      const user = await authService.signInWithEmailAndPassword(email, password);
+      const user = await auth.signInWithEmailAndPassword(email, password);
 
       expect(user).to.be.an('object');
       expect(user.email).to.equal(email);

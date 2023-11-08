@@ -1,13 +1,13 @@
-const admin = require('firebase-admin');
-const { expect } = require('chai');
-const serviceAccount = require('../../configs/quickride-qr0103-firebase-adminsdk-24xtb-32489b161c.json');
+import { initializeApp, credential as _credential, firestore } from 'firebase-admin';
+import { expect } from 'chai';
+import serviceAccount from '../../configs/quickride-qr0103-firebase-adminsdk-24xtb-32489b161c.json';
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+initializeApp({
+  credential: _credential.cert(serviceAccount),
   databaseURL: 'http://localhost:8080', 
 });
 
-const db = admin.firestore();
+const db = firestore();
 
 describe('Firestore Connection Tests', function () {
   it('should return data from Firestore', async function () {

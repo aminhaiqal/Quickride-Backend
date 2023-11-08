@@ -1,8 +1,8 @@
-const express = require('express');
+import express, { json } from 'express';
 const app = express();
-const authRoutes = require('./src/authentication/routes/auth_route');
+import authRoutes from './src/authentication/routes/auth_route';
 
-app.use(express.json());
+app.use(json());
 
 app.use('/api', authRoutes);
 
