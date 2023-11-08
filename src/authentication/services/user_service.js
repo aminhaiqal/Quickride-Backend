@@ -1,20 +1,29 @@
 const firebase = require('firebase/app');
-const { setCustomClaimsBasedOnUserRoles } = require('../middleware/roles');
 require('firebase/auth');
 
-async function signup(email, password) {
-  try {
-    // Create a new user with Firebase Authentication
-    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
-    const user = userCredential.user;
-    user.sendEmailVerification();
-    await setCustomClaimsBasedOnUserRoles(user.uid, { passenger: true });
-    return user;
-    
-  } catch (error) {
-    console.error('Error creating user:', error);
-    throw error;
+const firebaseConfig = require('../../../configs/firebase');
+firebase.initializeApp(firebaseConfig);
+
+class AuthService {
+  async signUpWithEmailAndPassword(email, password) {
+    try {
+      const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      return userCredential.user;
+    } catch (error) {
+      throw error;
+    }
   }
+
+  async signInWithEmailAndPassword(email, password) {
+    try {
+      const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+      return userCredential.user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Add methods for signing in with Facebook and Google
 }
 
-module.exports = { signup };
+module.exports = new AuthService();
