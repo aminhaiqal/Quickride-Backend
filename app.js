@@ -1,15 +1,12 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+const authRoutes = require('./src/authentication/routes/auth_route');
+
 app.use(express.json());
-const authRouter = require('./routers/auth_router');
-const port = 3000
 
-app.use('/account', authRouter);
+app.use('/api', authRoutes);
 
-app.get('/', (req, res) => {
-  res.send('Hello Express!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}: http://localhost:${PORT}`);
+});
