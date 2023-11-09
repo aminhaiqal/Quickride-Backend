@@ -9,11 +9,13 @@ describe('Auth Service', function () {
       const email = 'test@example.com';
       const password = 'password123';
 
-      const user = await auth.signUpWithEmailAndPassword(email, password);
-
-      expect(user).to.be.an('object');
-      expect(user.email).to.equal(email);
-      // Add more assertions based on the properties of your user object
+      auth.signUpWithEmailAndPassword(email, password)
+        .then(user => {
+          expect(user).to.be.an('object');
+          expect(user.email).to.equal(email);
+          // Add more assertions based on the properties of your user object
+        })
+        .catch(err => done(err));
     });
   });
 
@@ -22,11 +24,13 @@ describe('Auth Service', function () {
       const email = 'test@example.com';
       const password = 'password123';
 
-      const user = await auth.signInWithEmailAndPassword(email, password);
-
-      expect(user).to.be.an('object');
-      expect(user.email).to.equal(email);
-      // Add more assertions based on the properties of your user object
+      auth.signInWithEmailAndPassword(email, password)
+      .then(user => {
+        expect(user).to.be.an('object');
+        expect(user.email).to.equal(email);
+        // Add more assertions based on the properties of your user object
+      })
+      .catch(err => done(err));
     });
   });
 });
