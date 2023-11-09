@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import AuthService from '../../../src/authentication/services/user_service';
+import AuthService from '../../../src/authentication/services/user_service.js';
 
 const auth = new AuthService();
 

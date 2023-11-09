@@ -1,6 +1,6 @@
 import { Router } from 'express';
 const router = Router();
-import { signUpWithEmailAndPassword, signInWithEmailAndPassword } from '../services/user_service';
+import { signUpWithEmailAndPassword, signInWithEmailAndPassword } from '../services/user_service.js';
 import User from '../models/user-model';
 
 router.post('/signup', async (req, res) => {

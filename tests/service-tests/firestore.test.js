@@ -1,12 +1,13 @@
-import { initializeApp, credential as _credential, firestore } from 'firebase-admin';
+import admin from 'firebase-admin';
 import { expect } from 'chai';
-import serviceAccount from '../../configs/quickride-qr0103-firebase-adminsdk-24xtb-32489b161c.json';
+import serviceAccount from '../../configs/quickride-qr0103-firebase-adminsdk-24xtb-32489b161c.json' assert { type: "json" };
 
-initializeApp({
-  credential: _credential.cert(serviceAccount),
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
   databaseURL: 'http://localhost:8080', 
 });
 
+const { firestore } = admin;
 const db = firestore();
 
 describe('Firestore Connection Tests', function () {
