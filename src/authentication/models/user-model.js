@@ -1,4 +1,3 @@
-// user.js
 class User {
     constructor(uid, email, displayName) {
       this.uid = uid;
@@ -7,5 +6,5 @@ class User {
     }
   }
   
-  module.exports = User;
+  export default User;
   
