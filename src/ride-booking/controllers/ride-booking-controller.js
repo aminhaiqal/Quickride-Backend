@@ -1,5 +1,5 @@
-import RideBooking from '../models/RideBooking';
-import { validationResult } from 'express-validator';
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 const RideBookingController = {
   create: async (req, res) => {
@@ -9,10 +9,11 @@ const RideBookingController = {
     }
 
     try {
-      const newRideBooking = new RideBooking(req.body);
-      const savedRideBooking = await newRideBooking.save();
+      const newRideBooking = await prisma.rideBooking.create({
+        data: req.body,
+      });
 
-      res.json(savedRideBooking);
+      res.json(newRideBooking);
     } catch (err) {
       res.status(500).send(err);
     }
