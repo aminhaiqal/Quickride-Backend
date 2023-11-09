@@ -1,5 +1,5 @@
 import express from 'express';
-import RideBookingController from '../controllers/RideBookingController';
+import RideBookingController from '../controllers/ride-booking-controller.js';
 import { body } from 'express-validator';
 
 const router = express.Router();
