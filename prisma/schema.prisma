@@ -13,33 +13,37 @@ datasource db {
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
-  name      String?
+  name      String
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  events    Event[]
-  bookings  Booking[]
+  events    Ride[]
+  bookings  RideBooking[]
 }
 
-model Event {
+model Ride {
   id          String   @id @default(uuid())
   title       String
-  description String
+  description String?
   price       Float
   date        DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   user        User     @relation(fields: [userId], references: [id])
   userId      String
-  bookings    Booking[]
+  bookings    RideBooking[]
 }
 
-model Booking {
+model RideBooking {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  event     Event    @relation(fields: [eventId], references: [id])
-  eventId   String
+  ride      Ride     @relation(fields: [rideId], references: [id])
+  rideId    String
+  pickup    String
+  dropoff   String
+  payment   String?
+  ridepref  String?
 }

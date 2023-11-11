@@ -13,11 +13,14 @@ const db = firestore();
 describe('Firestore Connection Tests', function () {
   it('should return data from Firestore', async function () {
     const docRef = db.collection('testCollection').doc('testDocument');
-    await docRef.set({ field1: 'value1' });
+    docRef.set({ field1: 'value1' })
+    .then(() => docRef.get())
+    .then(docSnapshot => {
+      const data = docSnapshot.data();
+      expect(data.field1).to.equal('value1');
+      done();
+    })
+    .catch(err => done(err));
 
-    const docSnapshot = await docRef.get();
-    const data = docSnapshot.data();
-
-    expect(data.field1).to.equal('value1');
   });
 });
