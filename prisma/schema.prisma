@@ -14,10 +14,10 @@ model User {
   id        String   @id @default(uuid())
   email     String   @unique
   name      String
-  password  String
+  driver    Driver?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  events    Ride[]
+  ride      Ride[]
   bookings  RideBooking[]
 }
 
@@ -46,4 +46,14 @@ model RideBooking {
   dropoff   String
   payment   String?
   ridepref  String?
+}
+
+model Driver {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
