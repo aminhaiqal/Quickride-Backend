@@ -11,6 +11,7 @@ const io = new Server(server);
 // Import routes
 import authRoutes from './src/authentication/routes/auth_route.js';
 import rideBookingRoutes from './src/ride-booking/routes/ride-booking-route.js';
+import RatingReviewRoutes from './src/rating-review/routes/rating-review-route.js'; 
 
 // Use middlewares
 app.use(cors());
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
 // Use routes
 app.use('/api', authRoutes);
 app.use('/api', rideBookingRoutes);
+app.use('/api', RatingReviewRoutes);
 
 // Set up Socket.IO to handle location updates
 io.on('connection', (socket) => {
