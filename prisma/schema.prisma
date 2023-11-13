@@ -19,6 +19,7 @@ model User {
   updatedAt DateTime @updatedAt
   ride      Ride[]
   bookings  RideBooking[]
+  rating    RatingReview[]
 }
 
 model Ride {
@@ -56,4 +57,17 @@ model Driver {
   userId    String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  rating    RatingReview[]
+}
+
+model RatingReview {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  driver    Driver   @relation(fields: [driverId], references: [id])
+  driverId  String
+  rating    Int
+  review    String?
 }
